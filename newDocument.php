@@ -1,6 +1,7 @@
 <?php
-include ("includes/checkFunctions.php");
-include ("includes/dbConn.php");
+define('ROOTPATH', dirname(__FILE__));
+include (ROOTPATH."/includes/connect.php");
+hasPerms(0);
 ?>
     Creating as:
     <?php echo ifLogin(); ?>
@@ -15,18 +16,8 @@ include ("includes/dbConn.php");
         <input type="submit" value="Add">
         <input type="button" value="Cancel" name="cancel">
     </form>
-
-    <?php
-    if(isset($_GET['cancel'])) {
-        echo '
-        <script>
-        var url = "index.php";
-        window.location = url;
-        </script>';
-    }
-?>
-        * - require
-        <!--
+    * - require
+    <!--
 
 * Walidacja,
 * Wygeneruj losowy 9 znakowy ciąg url,
