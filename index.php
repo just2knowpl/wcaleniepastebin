@@ -1,6 +1,6 @@
 <?php
 define('ROOTPATH', dirname(__FILE__));
-include (ROOTPATH."/includes/connect.php");
+include (ROOTPATH."/includes/checkFunctions.php");
 echo ROOTPATH."/includes/connect.php";
 hasPerms(0);
 ?>
@@ -11,7 +11,7 @@ hasPerms(0);
     <!--main div-->
     Statystyki: Flexy: Documents: 0 Największa liczba dokumentów z języka: x
     <!--Duży fajny przycisk-->
-    <a href="newDocument.php">Create new file</a>
+    <a href="createDocument">Create new file</a>
     <!--Koniec dużego fajnego przyicsku-->
     <!--koniec main diva-->
 

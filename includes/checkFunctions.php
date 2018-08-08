@@ -3,10 +3,18 @@
 
 session_start(); //sesje aktywne
 $debug = 1; //0 - debug off, 1 - debug on
+$dbConnect = 1;//0 - Połączenie z bazą wyłączone, 1 - Połączenie z bazą aktywne
 
 
 //=================KONIEC USTAWIEŃ====================
-    
+
+//=================Funkcja dostępu do bazy (przełącznik)======================
+if($dbConnect == 1) {
+include (ROOTPATH."/includes/connect.php");
+}
+
+//=================Koniec przełacznika========================================
+
 //Funkcja sprawdza czy uzytkownik jest zalogowany
 function ifLogin() {
     if(isset($_SESSION['user'])) {
