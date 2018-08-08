@@ -35,8 +35,7 @@ mysqli_close($conn);
 
 
         <p>Content:</p>
-        <div class="d-flex p-2"><code id="code"><?php echo nl2br(strip_tags($text, '<script></script>')); ?></code></div>
-
+        <code id="code"><?php echo nl2br(strip_tags($text, '<script></script>')); ?></code>
 
 
 

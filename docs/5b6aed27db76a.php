@@ -35,19 +35,18 @@ mysqli_close($conn);
 
 
         <p>Content:</p>
-        <div class="d-flex p-2"><code id="code"><?php echo nl2br(strip_tags($text, '<script></script>')); ?></code></div>
-
+        <?php echo nl2br(strip_tags($text, '<script></script>')); ?>
 
 
 
         <p>Easy copy box</p>
-        <textarea class="form-control" value="<?php echo nl2br(strip_tags($text, '<script></script>')); ?>" readonly></textarea>
-        <button type="button" class="btn btn-dark" onclick="coppy()">Copy to clipboard</button>
+        <!--        <textarea class="form-control" type="text" placeholder="<?php echo nl2br(strip_tags($text, '<script></script>')); ?>" readonly></textarea>-->
+        <button type="button" class="btn btn-dark" onclick="copy()">Copy to clipboard</button>
         <a href="../index.php">Main Page</a>
         <script>
-            function coppy() {
+            function copy() {
                 /* Get the text field */
-                var copyText = document.getElementById("code");
+                var copyText = document.getElementById("myInput");
 
                 /* Select the text field */
                 copyText.select();

@@ -3,22 +3,34 @@ define('ROOTPATH', dirname(__FILE__));
 include (ROOTPATH."/includes/checkFunctions.php");
 hasPerms(0);
 ?>
-    Creating as:
-    <?php echo ifLogin(); ?>
-    <!--Data dodania-->
+    <html>
 
-    <form action="" method="post">
-        <p>Topic *</p>
-        <input type="text" placeholder="Your Topic" name="topic">
-        <p>text area *</p>
-        <p><textarea rows="7" cols="50" name="text" placeholder="Your code"></textarea></p>
+    <head>
+        <link rel="stylesheet" href="css/bootstrap.css" />
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <script src="js/bootstrap.js"></script>
+        <script src="js/bootstrap.js.map"></script>
+    </head>
 
+    <body>
+        <div class="container">
+            Creating as:
+            <?php echo ifLogin(); ?>
+            <!--Data dodania-->
 
-        <input type="submit" value="Add">
-        <input type="button" value="Cancel" name="cancel">
-    </form>
-    * - require
-    <?php
+            <form action="" method="post">
+                <p>Topic *</p>
+                <input type="text" placeholder="Your Topic" name="topic">
+                <p>text area *</p>
+                <div class="form-group">
+                    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" name="text" placeholder="Your text"></textarea>
+                </div>
+
+                <input type="submit" class="btn btn-primary btn-lg btns-add" value="Add">
+                <input type="button" class="btn btn-secondary btn-lg btns-cancel" value="Cancel" name="cancel">
+            </form>
+            * - require
+            <?php
     if(!empty($_REQUEST['topic']) && !empty($_REQUEST['text'])) {
             $topic = mysqli_real_escape_string($conn, $_REQUEST['topic']);
             $text = nl2br(mysqli_real_escape_string($conn, $_REQUEST['text']), false);
@@ -63,11 +75,14 @@ echo (is_readable($randomUrl.".php")) ? 'readable' : 'not readable';
         exit;
     }
 else {
-    echo "Wszystkie pola muszą zostać wypełnione!";
+    echo '
+    <div class="alert alert-danger" role="alert">
+  Wszystkie pola muszą zostać wypełnione!
+</div>';
 }
 
 ?>
-        <!--
+                <!--
 
 * Walidacja,
 * Wygeneruj losowy 9 znakowy ciąg url,
@@ -76,3 +91,7 @@ else {
 * Jesli nie to losuj ponownie,
 * Przejdź do dokumentu
 -->
+        </div>
+    </body>
+
+    </html>
