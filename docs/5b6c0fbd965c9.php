@@ -4,15 +4,12 @@
     <link rel="stylesheet" href="../css/bootstrap.css" />
     <link rel="stylesheet" href="../css/bootstrap.min.css" />
     <link rel="stylesheet" href="../css/style.css" />
-    <!--    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=sons-of-obsidian"></script>-->
-    <!--    <link rel="stylesheet" type="text/css" href="../google-code-prettify/prettify.css">-->
-    <link rel="stylesheet" type="text/css" href="../google-code-prettify/skins/sons-of-obsidian.css">
-    <script type="text/javascript" src="../google-code-prettify/prettify.js"></script>
+    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=sunburst"></script>
     <script src="../js/bootstrap.js"></script>
     <script src="../js/bootstrap.js.map"></script>
 </head>
 
-<body onload="PR.prettyPrint()">
+<body>
     <!--    <div class="se-pre-con"></div>-->
     <?php
 define('ROOTPATH', dirname(__DIR__));
@@ -25,7 +22,7 @@ if($res) {
     $row = mysqli_fetch_array($res, MYSQLI_ASSOC);
     $autor = $row['author'];
     $title = $row['title'];
-    $czas = $row['data'];
+    $czas = $result=$row['data'];
     /*if($czas < 1) {
         return  "Right now";
     }
@@ -36,7 +33,7 @@ if($res) {
     else if($czas>60) {
         return floor($czas/60)."hours ago"; 
     }*/
-    $text = str_replace('>','&gt;',str_replace('<','&lt;',$row['text']));
+    $text = nl2br(str_replace('>','&gt;',str_replace('<','&lt;',$row['text'])));
     
 }
 mysqli_close($conn);
@@ -55,7 +52,7 @@ mysqli_close($conn);
         <p>Content:</p>
         <?prettify lang=html linenums=true?>
             <pre class="prettyprint">
-        <div class="d-flex p-2"><code id="code"><?php echo strip_tags($text, '<script></script>'); ?></code></div>
+        <div class="d-flex p-2"><code id="code"><?php echo nl2br(strip_tags($text, '<script></script>')); ?></code></div>
         </pre>
 
 

@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="../css/bootstrap.min.css" />
     <link rel="stylesheet" href="../css/style.css" />
     <!--    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js?skin=sons-of-obsidian"></script>-->
-    <!--    <link rel="stylesheet" type="text/css" href="../google-code-prettify/prettify.css">-->
+    <link rel="stylesheet" type="text/css" href="../google-code-prettify/prettify.css">
     <link rel="stylesheet" type="text/css" href="../google-code-prettify/skins/sons-of-obsidian.css">
     <script type="text/javascript" src="../google-code-prettify/prettify.js"></script>
     <script src="../js/bootstrap.js"></script>
@@ -25,7 +25,7 @@ if($res) {
     $row = mysqli_fetch_array($res, MYSQLI_ASSOC);
     $autor = $row['author'];
     $title = $row['title'];
-    $czas = $row['data'];
+    $czas = $result=$row['data'];
     /*if($czas < 1) {
         return  "Right now";
     }
@@ -36,7 +36,7 @@ if($res) {
     else if($czas>60) {
         return floor($czas/60)."hours ago"; 
     }*/
-    $text = str_replace('>','&gt;',str_replace('<','&lt;',$row['text']));
+    $text = nl2br(str_replace('>','&gt;',str_replace('<','&lt;',$row['text'])));
     
 }
 mysqli_close($conn);

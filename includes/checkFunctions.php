@@ -1,4 +1,5 @@
 <?php
+//include ROOTPATH.'/init.php';
 //================USTAWIENIA GŁÓWNE==================
 
 session_start(); //sesje aktywne
@@ -15,7 +16,7 @@ include (ROOTPATH."/includes/connect.php");
 
 //=================Koniec przełacznika========================================
 
-//Funkcja sprawdza czy uzytkownik jest zalogowany
+//Funkcja sprawdza czy uzytkownik jest zalogowany 
 function ifLogin() {
     if(isset($_SESSION['user'])) {
         return $_SESSION['user'];

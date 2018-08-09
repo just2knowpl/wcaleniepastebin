@@ -33,7 +33,7 @@ hasPerms(0);
             <?php
     if(!empty($_REQUEST['topic']) && !empty($_REQUEST['text'])) {
             $topic = mysqli_real_escape_string($conn, $_REQUEST['topic']);
-            $text = nl2br(mysqli_real_escape_string($conn, $_REQUEST['text']), false);
+            $text = mysqli_real_escape_string($conn, $_REQUEST['text']);
             $exist = true;
     while ($exist == true) {
             $randomUrl = mysqli_real_escape_string($conn, uniqid());
@@ -44,8 +44,9 @@ hasPerms(0);
                 if($GLOBALS['debug'] == 1) {
                 echo "<script>console.log('Ciąg znaków wolny. Tworzenie url..');</script>";
             }
+                $czas = date("Y-m-d H:i:s");
                 //dodanie rekordu do bazy
-                mysqli_query($conn, "INSERT INTO `docs` (`url`, `title`, `text`) VALUES ('".$randomUrl."', '".$topic."', '".$text."');");
+                mysqli_query($conn, "INSERT INTO `docs` (`url`, `title`, `text`, `author`, `data`) VALUES ('".$randomUrl."', '".$topic."', '".$text."', '".ifLogin()."', '".$czas."');");
             }
             else {
                 $exist = true;
@@ -64,11 +65,9 @@ $newfile = $sites."/".$randomUrl.".php";
     $fh = fopen($newfile, 'wb');
     fwrite($fh, $newcontent);
 
-
 fclose($fh);
 chmod($newfile, 0777);
 
-// echo (is_writable($filnme_epub.".js")) ? 'writable' : 'not writable';
 echo (is_readable($randomUrl.".php")) ? 'readable' : 'not readable';
         //przejscie na strone dokumentu
         header("Location: docs/$randomUrl");
@@ -82,15 +81,7 @@ else {
 }
 
 ?>
-                <!--
 
-* Walidacja,
-* Wygeneruj losowy 9 znakowy ciąg url,
-* Sprawdź, czy istnieje w bazie, 
-* Jeśli tak to dodaj do bazy,
-* Jesli nie to losuj ponownie,
-* Przejdź do dokumentu
--->
         </div>
     </body>
 
