@@ -1,0 +1,31 @@
+body {
+    background: url('../img/bg.png');
+    background-attachment: fixed;
+}
+
+.playerBox {
+    margin: 0 auto;
+    text-align: center;
+    width: 50%;
+    background: url(../img/bg_profile.png);
+    background-position: 100% 100%;
+    background-size: cover;
+    color: white;
+    padding: 10px;
+
+}
+
+.avatar {
+    position: relative;
+    top: 0;
+    left: 0;
+    float: left;
+    width: 150px;
+    height: 150px;
+
+}
+
+.rank_ico {
+    width: 55px;
+    height: 55px;
+}
