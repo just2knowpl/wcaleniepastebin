@@ -11,21 +11,184 @@ body {
     background-position: 100% 100%;
     background-size: cover;
     color: white;
-    padding: 10px;
-
+    height: 175px;
+    border-radius: 5px;
+    box-shadow: 2px 3px 5px black;
+    font-weight: bold;
+    /*    padding: 10px;*/
 }
 
 .avatar {
-    position: relative;
-    top: 0;
-    left: 0;
     float: left;
-    width: 150px;
-    height: 150px;
+    width: 175px;
+    height: 175px;
+    border-radius: 5px;
 
 }
 
 .rank_ico {
     width: 55px;
     height: 55px;
+}
+
+.ranksTable > tbody > tr > th {
+    padding: 4px;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 0.5 !important;
+}
+
+.nickname {
+    font-size: 22px;
+    float: left;
+    font-weight: bold;
+}
+
+.rank_coutry {
+    float: left;
+    font-size: 22px;
+    font-weight: bold;
+}
+
+.pp {
+    color: #7fc0e2;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+
+}
+
+.combo {
+    font-weight: bold;
+    font-size: 25px;
+    font-style: italic;
+}
+
+.pp2 {
+    color: #faaf06;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+
+}
+
+.acc {
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+}
+
+* {
+    text-shadow: 2px 2px 2px black;
+}
+
+.hit300 {
+    color: #1ec4db;
+}
+
+.hit100 {
+    color: #40d539;
+}
+
+.hit50 {
+    color: #ffb300;
+}
+
+.separator {
+    margin: 2px;
+}
+
+
+.poziom1 {
+    display: flex;
+    justify-content: space-between;
+    /*    align-items: center;*/
+    /*    flex-direction: row;*/
+    margin: 0 auto;
+    padding: 5px;
+}
+
+.poziom2 {
+    display: flex;
+    justify-content: space-between;
+    /*    align-items: center;*/
+    /*    flex-direction: row;*/
+    margin: 0 auto;
+    padding: 5px;
+    line-height: 1;
+}
+
+.scores {
+    font-weight: bold;
+    font-size: 20px;
+    align-self: flex-end;
+    clear: both;
+}
+
+.player_lvl {
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 70px;
+    flex: 0 0 70px;
+    height: 70px;
+    background: url(../img/level_badge.png) no-repeat;
+    background-size: cover;
+    padding-top: 12px;
+    margin-right: -4px;
+    color: #fff;
+    font-size: 22px;
+    line-height: 25px;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: none;
+}
+
+.top10 {
+    text-align: center;
+    margin: 10px;
+    text-shadow: none;
+    text-transform: uppercase;
+
+}
+
+.topSongs {
+    margin: 0 auto;
+    text-align: center;
+    width: 45%;
+    background: url(../img/bg_profile.png);
+    background-position: 100% 100%;
+    background-size: cover;
+    color: white;
+    height: 150px;
+    border-radius: 5px;
+    box-shadow: 2px 3px 5px black;
+    font-weight: bold;
+    margin-top: 15px;
+    background-position: center;
+    background-size: cover;
+    /*    padding: 10px;*/
+}
+
+.pls {
+    display: flex;
+    justify-content: space-between;
+}
+
+.bestSong_table > tbody > tr > th > h3 {
+    font-size: 15px;
+    border-spacing: 0px;
+    float: left;
+    line-height: 0.5 !important;
+}
+
+
+.title {
+    color: #00b1ff;
+    font-size: 22px !important;
+    text-shadow: 3px 4px 5px black;
+    font-weight: bold;
+}
+
+.artist {
+    font-style: italic;
+    font-weight: 700;
 }

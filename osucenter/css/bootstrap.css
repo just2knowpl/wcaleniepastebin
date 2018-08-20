@@ -340,6 +340,10 @@ legend {
 
 progress {
     vertical-align: baseline;
+    clear: both;
+    margin: 0 auto;
+    text-align: center;
+    width: 50%;
 }
 
 [type="number"]::-webkit-inner-spin-button,
@@ -5347,6 +5351,9 @@ tbody.collapse.show {
     overflow: hidden;
     font-size: 0.75rem;
     background-color: #e9ecef;
+    clear: both;
+    width: 50%;
+    margin: 0 auto;
 }
 
 .progress-bar {

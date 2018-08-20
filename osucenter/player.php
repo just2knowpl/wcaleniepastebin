@@ -1,13 +1,16 @@
-<!DOCTYPE html>
+<?php
+include 'functions.php';
+?>
+    <!DOCTYPE html>
 
-<head>
-    <title>Patisony gotowane</title>
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="stylesheet" href="css/bootstrap.css" />
-</head>
+    <head>
+        <title>Patisony gotowane</title>
+        <link rel="stylesheet" href="css/style.css" />
+        <link rel="stylesheet" href="css/bootstrap.css" />
+    </head>
 
-<body id="players">
-    <?php
+    <body id="players">
+        <?php
 if(!empty($_GET['nick'])) {
     
 
@@ -24,9 +27,12 @@ $json_recent = json_decode($recent, true);
     if($json) {
         $nickname = $json[0]['username'];
         $playerId = $json[0]['user_id'];
-        $pp = $json[0]['pp_raw'];
-        $totalPoints = $json[0]['total_score'];
-        $rankedPoints = $json[0]['ranked_score'];
+        $pp = number_format(round($json[0]['pp_raw'],0));
+        $totalPoints = number_format($json[0]['total_score']);
+        $rankedPoints = number_format($json[0]['ranked_score']);
+        $count300 = number_format(300 * $json[0]['count300']);
+        $count100 = number_format(100 * $json[0]['count100']);
+        $count50 = number_format(50 * $json[0]['count50']);
         $lvl = round($json[0]['level'],2);
         $lvl_arr = explode('.',$lvl);
         //$lvl_arr[0];  // Before the Decimal point
@@ -37,83 +43,147 @@ $json_recent = json_decode($recent, true);
         $s_rank = $json[0]['count_rank_s'];
         $sh_rank = $json[0]['count_rank_sh'];
         $a_rank = $json[0]['count_rank_a'];
-        $country = $json[0]['country'];
-        $country_rank = $json[0]['pp_country_rank'];
-        $global_rank = $json[0]['pp_rank'];
+        $country = country($json[0]['country']);
+        $country_rank = number_format($json[0]['pp_country_rank']);
+        $global_rank = number_format($json[0]['pp_rank']);
         $pos = 1; //zmienna pomocnicza;
         
-        
-        
+
         echo "
         <div class='playerBox'>
         <img src='https://a.ppy.sh/".$playerId."' alt='".$nickname."' class='rounded-0 avatar'>
-        <h1 class='nick'>".$nickname."(#".$global_rank.")</h1>
-        <h2>".$country."(#".$country_rank.")</h2>
+        <div class='poziom1'>
+        <table class='nick'>
+        <tr><th>
+        <h1 class='nickname'>".$nickname."(#".$global_rank.")</h1>
+        </th></tr>
+        <tr><th>
+        <h2 class='rank_coutry'>".$country."(#".$country_rank.")</h2>
+        </th></tr></table>
+        <div class='player_lvl'>".$lvl_arr[0]."</div>
+        <table class='ppacc'>
+        <tr>
+        <th>
+        <div class='pp'>".$pp."pp</div>
+        </th></tr>
+        <tr><th>
+        <div class='acc'>".$acc."% acc</div>
+        </th></tr>
+        </table>
+        </div>
+        <div class='poziom1'>
+        <div class='ranks'>
+        <table class='ranksTable'>
+        <tr>
         <div class='rank_icons'>
-        <img src='img/SSH.png' alt='SSH' class='rank_ico'>
-        <img src='img/SS.png' alt='SS' class='rank_ico'>
-        <img src='img/SH.png' alt='SH' class='rank_ico'>
-        <img src='img/S.png' alt='S' class='rank_ico'>
-        <img src='img/A.png' alt='A' class='rank_ico'></div>
-        <div class='rank_count'>1 2 3 4 5</div>
-        <div class='progress'>
-        <div class='progress-bar progress-bar-striped bg-warning' role='progressbar' style='width: ".$lvl_arr[1]."%' aria-valuenow='75' aria-valuemin='0' aria-valuemax='100'><div>".$lvl_arr[0]." LVL</div></div>
+        <th><img src='img/SSH.png' alt='SSH' class='rank_ico'></th>
+        <th><img src='img/SS.png' alt='SS' class='rank_ico'></th>
+        <th><img src='img/SH.png' alt='SH' class='rank_ico'></th>
+        <th><img src='img/S.png' alt='S' class='rank_ico'></th>
+        <th><img src='img/A.png' alt='A' class='rank_ico'></th></div>
+        </tr>
+        <tr>
+        <div class='rank_count'>
+        <th><div>".$ssh_rank."</div></th>
+        <th><div>".$ss_rank."</div></th>
+        <th><div>".$sh_rank."</div></th>
+        <th><div>".$ss_rank."</div></th>
+        <th><div>".$a_rank."</div></th>
+        </tr>
+        </table></div>
+        <div class='scores'>
+        <table class='valuescr'>
+        <tr>
+        <th><div>Ranked score: ".$rankedPoints."</div></th>
+        </tr>
+        <tr>
+        <th><div class=''><span class='hit300'>".$count300."</span><span class='separator'>/</span><span class='hit100'>".$count100."</span><span class='separator'>/</span><span class='hit50'>".$count50."</span></th>
+        </tr>
+        </table>
+        </div>
+        </div>
+  
         </div>
         </div>
         </div>
-        <div>PP: ".$pp."</div>
-        <div>Accuracy: ".$acc."</div>
-        <div>Total points: ".$totalPoints."</div>
-        <div>Ranked points: ".$rankedPoints."</div>
-        <div>SS+: ".$ssh_rank."</div>
-        <div>SS: ".$ss_rank."</div>
-        <div>S+: ".$sh_rank."</div>
-        <div>S: ".$ss_rank."</div>
-        <div>A: ".$a_rank."</div>
-        <h2>Top 10 plays:</h2> 
+        
+        
+        
+
+        
+        
+        
+        
+        
+        <div class='pls'>
         ";
         //===========best_score=============
         for($i=0;$i<count($json_best_plays);$i++) {
             $b_id = $json_best_plays[$i]['beatmap_id'];
-            $song_checker = file_get_contents('https://osu.ppy.sh//api/get_beatmaps?&k='.$api_key.'&b='.$b_id);
+            $song_checker = file_get_contents('https://osu.ppy.sh/api/get_beatmaps?&k='.$api_key.'&b='.$b_id);
             $json_song_checker = json_decode($song_checker, true);
-            echo "<h3>Top ". $pos ."</h3>";
-            echo "<h3>Song name: ". $json_song_checker[0]['title'] ."</h3>";
-            echo "<h3>Created by: ". $json_song_checker[0]['creator'] ."</h3>";
-            echo "<p>Score: ".$json_best_plays[$i]['score']."</p>";
-            echo "<p>Combo: ".$json_best_plays[$i]['maxcombo']."</p>";
-            if($json_best_plays[$i]['perfect'] == 1) {
-                echo "<p>FC"."</p>";
-            }
-            //TODO: sprawdzanie w bazie danych. Odciążenie requestów. Jeżeli dana beatmapa nie istnieje w bazie, trzeba ją dodać wraz z potrzebnymi informacjami, w przeciwnym wypadku ma pobrać informacje z bazy. 
+            $bset_id = $json_song_checker[0]['beatmapset_id'];
+            $mapCover = "https://assets.ppy.sh/beatmaps/".$bset_id."/covers/cover.jpg";
+            echo "<div class='topSongs' style='background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.7)), url(".$mapCover.");'>";
+            echo "<div class='poziom2'>";
+//            echo "<h3>#". $pos ."</h3>";
+            echo "<table class='bestSong_table'>";
+            echo "<tr>";
+            echo "<th><h3 class='title'>". $json_song_checker[0]['title'] ."</h3>";
+            echo "</th></tr><tr>";
+            echo "<th><h3 class='artist'>". $json_song_checker[0]['artist'] ."</h3>";
+            echo "</th></tr>";
+            echo "</table>";
+            echo "<div class='pp2'>".round($json_best_plays[$i]['pp'],2)."pp</div>
+            </div>";
+            echo "<div class='stats'>
+            STARS: ".round($json_song_checker[0]['difficultyrating'],1)." 
+            Time: 1 
+            BPM: ".$json_song_checker[0]['bpm']." 
+            AR: ".$json_song_checker[0]['diff_approach']." 
+            CS: ".$json_song_checker[0]['diff_size']."
+            OD: ".$json_song_checker[0]['diff_overall']." 
+            HP: ".$json_song_checker[0]['diff_drain']." 
+            </div>
+            <div class='poziom2'>
+            <p>Score: ".$json_best_plays[$i]['score']."</p>";
             echo "<p>Rank: ".$json_best_plays[$i]['rank']."</p>";
-            echo "<p>Star ratting: ".round($json_song_checker[0]['difficultyrating'],1)."</p>";
-            echo "<p>PP: ".$json_best_plays[$i]['pp']."</p>";
-            echo "<p>CS: ".$json_song_checker[0]['diff_size']." ";
-            echo "OD: ".$json_song_checker[0]['diff_overall']." ";
-            echo "AR: ".$json_song_checker[0]['diff_approach']." ";
-            echo "HP: ".$json_song_checker[0]['diff_drain']." ";
-            echo "BPM: ".$json_song_checker[0]['bpm']."</p>";
+            //TODO: sprawdzanie w bazie danych. Odciążenie requestów. Jeżeli dana beatmapa nie istnieje w bazie, trzeba ją dodać wraz z potrzebnymi informacjami, w przeciwnym wypadku ma pobrać informacje z bazy. 
+            echo "</div>";
+                
+            if($json_best_plays[$i]['perfect'] == 1) {
+                echo "<div class='combo'>FULL COMBO</div>";
+            }
+            else {
+                echo "<div class='combo'>".$json_best_plays[$i]['maxcombo']."/".$json_song_checker[0]['max_combo']."</div>";
+            }
+            echo "</div>";
+
+            if($pos % 2 == 0) {
+                echo "</div><div class='pls'>";
+            }
+            echo "<script>console.log('".$pos."')</script>";
             $pos++;
+            
         }
         unset($pos);
         
-        echo count ($json_best_plays);
-        echo "<h2>10 most recent plays over the last 24 hours</h2>";
-        for($i=0;$i<count($json_recent);$i++) {
-            $map_id = $json_recent[$i]['beatmap_id'];
-             echo "
-            <p>beatmap name:</p>
-            <p>artist:</p>
-            <p>maxcombo:</p>
-            <p>300: 100: 50: miss:</p>
-            <p>rank:</p>
-            <p>mods:</p>
-            ";
-            if($json_recent[$i]['perfect'] == 1) {
-                echo "<p>fc</p>";
-            }
-        }
+//        echo count ($json_best_plays);
+//        echo "<h2>10 most recent plays over the last 24 hours</h2>";
+//        for($i=0;$i<count($json_recent);$i++) {
+//            $map_id = $json_recent[$i]['beatmap_id'];
+//             echo "
+//            <p>beatmap name:</p>
+//            <p>artist:</p>
+//            <p>maxcombo:</p>
+//            <p>300: 100: 50: miss:</p>
+//            <p>rank:</p>
+//            <p>mods:</p>
+//            ";
+//            if($json_recent[$i]['perfect'] == 1) {
+//                echo "<p>fc</p>";
+//            }
+//        }
        
         
     }
@@ -125,6 +195,6 @@ $json_recent = json_decode($recent, true);
 }
 ?>
 
-</body>
+    </body>
 
-</html>
+    </html>
