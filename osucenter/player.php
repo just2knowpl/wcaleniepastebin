@@ -38,11 +38,11 @@ $json_recent = json_decode($recent, true);
         //$lvl_arr[0];  // Before the Decimal point
         //$lvl_arr[1];  // After the Decimal point
         $acc = round($json[0]['accuracy'],2);
-        $ss_rank = $json[0]['count_rank_ss'];
-        $ssh_rank = $json[0]['count_rank_ssh'];
-        $s_rank = $json[0]['count_rank_s'];
-        $sh_rank = $json[0]['count_rank_sh'];
-        $a_rank = $json[0]['count_rank_a'];
+        $ss_rank = number_format($json[0]['count_rank_ss']);
+        $ssh_rank = number_format($json[0]['count_rank_ssh']);
+        $s_rank = number_format($json[0]['count_rank_s']);
+        $sh_rank = number_format($json[0]['count_rank_sh']);
+        $a_rank = number_format($json[0]['count_rank_a']);
         $country = country($json[0]['country']);
         $country_rank = number_format($json[0]['pp_country_rank']);
         $global_rank = number_format($json[0]['pp_rank']);
@@ -134,29 +134,41 @@ $json_recent = json_decode($recent, true);
             echo "<th><h3 class='artist'>". $json_song_checker[0]['artist'] ."</h3>";
             echo "</th></tr>";
             echo "</table>";
-            echo "<div class='pp2'>".round($json_best_plays[$i]['pp'],2)."pp</div>
-            </div>";
+            echo "<table> <tr>";
+            echo "<th><div class='pp2'>".round($json_best_plays[$i]['pp'],2)."pp</div></th></tr>";
+            echo "<tr><th class='acc2'>".accCalc($json_best_plays[$i]['count300'],$json_best_plays[$i]['count100'],$json_best_plays[$i]['count50'],$json_best_plays[$i]['countmiss'])." acc</th></tr>"; 
+            echo "</table>  </div>";
             echo "<div class='stats'>
-            STARS: ".round($json_song_checker[0]['difficultyrating'],1)." 
-            Time: 1 
-            BPM: ".$json_song_checker[0]['bpm']." 
-            AR: ".$json_song_checker[0]['diff_approach']." 
-            CS: ".$json_song_checker[0]['diff_size']."
-            OD: ".$json_song_checker[0]['diff_overall']." 
-            HP: ".$json_song_checker[0]['diff_drain']." 
+            <p class='icon_stats_star'> </p> ".round($json_song_checker[0]['difficultyrating'],1)." 
+            <p> <img src='https://osu.ppy.sh/images/layout/beatmapset-page/total_length.svg' class='icon_stats' title='time length'> ".timeCorrect($json_song_checker[0]['total_length'])." </p>
+            <p><img src='https://osu.ppy.sh/images/layout/beatmapset-page/bpm.svg' class='icon_stats'>".round($json_song_checker[0]['bpm'],0)." </p>
+            <p class='icon_stats'> AR </p> ".$json_song_checker[0]['diff_approach']." 
+            <p class='icon_stats'> CS </p> ".$json_song_checker[0]['diff_size']."
+            <p class='icon_stats'> OD </p> ".$json_song_checker[0]['diff_overall']." 
+            <p class='icon_stats'> HP </p> ".$json_song_checker[0]['diff_drain']." 
             </div>
             <div class='poziom2'>
-            <p>Score: ".$json_best_plays[$i]['score']."</p>";
-            echo "<p>Rank: ".$json_best_plays[$i]['rank']."</p>";
+            ";
+            echo "<table class='scoreCount'><tr><td>";
+            if($json_best_plays[$i]['perfect'] == 1) {
+                echo "<div class='combo'>FULL COMBO</div></td></tr>";
+            }
+            else {
+                echo "<div class='combo'>".number_format($json_best_plays[$i]['maxcombo'])."/".number_format($json_song_checker[0]['max_combo'])."</div></td></tr>";
+            }
+            echo "<tr><td><span class='hit300'>".$json_best_plays[$i]['count300']."</span><span class='separator'>/</span><span class='hit100'>".$json_best_plays[$i]['count100']."</span><span class='separator'>/</span><span class='hit50'>".$json_best_plays[$i]['count50']."</span></td></tr></table>";
+            //===========
+            echo "<p style='width: 33%;'><img src='img/".$json_best_plays[$i]['rank']."-rank.png' class='.small-ico'></p>";
+            echo "
+            <p class='fullScores'>".number_format($json_best_plays[$i]['score'])." points</p>";
+            
             //TODO: sprawdzanie w bazie danych. Odciążenie requestów. Jeżeli dana beatmapa nie istnieje w bazie, trzeba ją dodać wraz z potrzebnymi informacjami, w przeciwnym wypadku ma pobrać informacje z bazy. 
             echo "</div>";
                 
-            if($json_best_plays[$i]['perfect'] == 1) {
-                echo "<div class='combo'>FULL COMBO</div>";
-            }
-            else {
-                echo "<div class='combo'>".$json_best_plays[$i]['maxcombo']."/".$json_song_checker[0]['max_combo']."</div>";
-            }
+            
+            
+            
+             
             echo "</div>";
 
             if($pos % 2 == 0) {
@@ -167,6 +179,8 @@ $json_recent = json_decode($recent, true);
             
         }
         unset($pos);
+        
+            
         
 //        echo count ($json_best_plays);
 //        echo "<h2>10 most recent plays over the last 24 hours</h2>";
@@ -185,15 +199,16 @@ $json_recent = json_decode($recent, true);
 //            }
 //        }
        
-        
     }
 
     else {
         echo "user nie istnieje";
+        exit();
     }
 
 }
 ?>
+            <h2>Recent plays</h2>
 
     </body>
 

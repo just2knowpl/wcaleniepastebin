@@ -1,12 +1,13 @@
 body {
     background: url('../img/bg.png');
     background-attachment: fixed;
+    width: 70%;
 }
 
 .playerBox {
     margin: 0 auto;
     text-align: center;
-    width: 50%;
+    width: 70%;
     background: url(../img/bg_profile.png);
     background-position: 100% 100%;
     background-size: cover;
@@ -59,9 +60,11 @@ body {
 }
 
 .combo {
-    font-weight: bold;
+    width: 33%;
+    float: left;
+    /*    font-weight: bold;
     font-size: 25px;
-    font-style: italic;
+    font-style: italic;*/
 }
 
 .pp2 {
@@ -116,6 +119,8 @@ body {
     margin: 0 auto;
     padding: 5px;
     line-height: 1;
+    width: 100%;
+    align-items: center;
 }
 
 .scores {
@@ -123,6 +128,7 @@ body {
     font-size: 20px;
     align-self: flex-end;
     clear: both;
+    margin-top: -20px;
 }
 
 .player_lvl {
@@ -153,12 +159,12 @@ body {
 .topSongs {
     margin: 0 auto;
     text-align: center;
-    width: 45%;
+    width: 48%;
     background: url(../img/bg_profile.png);
     background-position: 100% 100%;
     background-size: cover;
     color: white;
-    height: 150px;
+    height: 160px;
     border-radius: 5px;
     box-shadow: 2px 3px 5px black;
     font-weight: bold;
@@ -191,4 +197,71 @@ body {
 .artist {
     font-style: italic;
     font-weight: 700;
+}
+
+.icon_stats {
+    padding-top: .230em;
+    font-size: .756em;
+    width: 1.9084em;
+    height: 1.9084em;
+    vertical-align: bottom;
+    background: url(../img/blank.svg);
+    background-size: cover;
+    font-weight: bold;
+    text-align: center;
+    text-shadow: none;
+    color: #fd5;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.icon_stats_star {
+    padding-top: .230em;
+    font-size: .756em;
+    width: 1.9084em;
+    height: 1.9084em;
+    vertical-align: bottom;
+    background: url(../img/star_dif.svg);
+    background-size: cover;
+    font-weight: 700;
+    text-align: center;
+    text-shadow: none;
+    color: #fd5;
+    margin-right: 5px;
+    margin-left: 5px;
+}
+
+.stats {
+    display: inline-flex;
+}
+
+.acc2 {
+    float: right;
+    color: #f2d576;
+    font-size: 18px;
+}
+
+.comboB {
+    float: left;
+}
+
+.small-ico {
+    width: 35px;
+    height: 35px;
+}
+
+.fullScores {
+    width: 33%;
+    float: right;
+}
+
+.scoreCount {
+    float: left;
+    text-align: center;
+    margin: auto;
+}
+
+.scoreCount > tbody > tr > td {
+    float: left;
+    width: 100%;
 }
