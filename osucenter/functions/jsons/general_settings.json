@@ -1,0 +1,9 @@
+{
+    "user_access": {
+        "login": true,
+        "register": true
+    },
+    "lang": {
+        "lang":"pl"
+    }
+}

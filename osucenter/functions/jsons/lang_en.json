@@ -1,0 +1,13 @@
+{
+    "rejestracja": {
+        "PodajImie": "Jak mamy się do Ciebie zwracać?",
+        "PodajHaslo": "Zabezpiecz swoje konto! Podaj bezpieczne hasło",
+        "PotworzHaslo": "Musimy upewnić się, że się nie pomyliłeś.. Potwórz hasło!",
+       "PodajEmail": "",
+        "WysylanieInformacji": ""
+    },
+    "ogolne": {
+        "Tak": "Yes",
+        "Nie": "No"
+    }
+}
