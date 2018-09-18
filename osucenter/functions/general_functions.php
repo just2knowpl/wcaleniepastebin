@@ -1,5 +1,15 @@
 <?php
 session_start();
+function dbConn() {
+    $db_user = 'localhost';
+    $db_name = 'root';
+    $db_pass = '';
+    $db_host = 'osucenter';
+    $conn = mysqli_connect($db_host,$db_user,$db_pass,$db_name);
+    if($conn) {
+        return $conn;
+    }
+}
 function jsonLocalFileParse($file_name) {
     /* 
     * Funkcja zwracająca jsona z pliku

@@ -5,13 +5,14 @@
         "PotworzHaslo": "Musimy upewnić się, że się nie pomyliłeś.. Potwórz hasło!",
         "PodajEmail": "W celu bezpieczeństwa, podaj swój adres email. Możesz go zmienić w każdej chwilii po założeniu konta",
         "WysylanieInformacji": "Zezwól na wysyłanie informacji o nowościach, konkurasch, oraz komunikatach na twoją skrzynkę pocztową. Możesz anulować tą funkcję w każdej chwili :)",
-        "PodajNickWOsu":"Podaj swój nick w grze. Jeżeli jest taki sam, jak twój nick podany wcześniej, zignoruj ten etap :)",
-        "ZakonczRejestracje":"To juz koniec rejestracji konta!",
+        "PodajNickWOsu": "Podaj swój nick w grze. Jeżeli jest taki sam, jak twój nick podany wcześniej, zignoruj ten etap :)",
+        "ZakonczRejestracje": "To juz koniec rejestracji konta!",
         "ZarejestrujSie": "Zakończ rejestrację!"
     },
     "ogolne": {
         "Tak": "Tak",
         "Nie": "Nie",
-        "Dalej": "Dalej"
+        "Dalej": "Dalej",
+        "Wroc": "Wróć"
     }
 }

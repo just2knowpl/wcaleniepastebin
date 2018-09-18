@@ -5,16 +5,19 @@
 ?>
 
 * {
-    padding: 0;
-    margin: 0 auto;
-    text-align: center;
+padding: 0;
+margin: 0 auto;
+text-align: center;
 }
 .register_element {
-    display: none;
+display: block;
 }
-.register_element:nth-child(<?php echo registerEtap();?>) {
-    display: block;
+/*
+.register_element:nth-child(
+<?php echo registerEtap();?>) {
+display: block;
 }
+*/
 #buttonDalej {
-    display: none;
+display: none;
 }

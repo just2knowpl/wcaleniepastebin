@@ -1,7 +1,40 @@
 <?php
 
-function registerUser() {
+function checkNazwa($username) {
+    if(isset($username)) {
+        $usernameV = mysqli_real_escape_string($username);
+        $query = mysqli_query(dbConn(),"SELECT `` FROM `` WHERE `` = `".$usernameV."`");
+        if($query) {
+            return false;
+        }
+        return true;
+    }
+}
+function checkHaslo($password,$powtorzPassword) {
+    if(isset($password) && isset($potworzPassword)) {
+        if($password == $powtorzPassword) {
+            return true;
+        }
+        return false;
+    }
+    return false;
+}
+function checkEmail($email) {
     
+}
+
+function registerUser($sprawdzonyName,$sprawdzonyPass,$sprawdzonyInfo,$sprawdzonyEmail,$sprawdzonyNick) {
+        if($sprawdzonyName || $sprawdzonyPass || $sprawdzonyInfo || $sprawdzonyEmail || $sprawdzonyNick) {
+            /*...*/
+            
+        }
+    }
+}
+function ifInformacje($infoStatus) {
+    if($infoStatus) {
+        return true;
+    }
+    return false;
 }
 function registerEtap() {
     if(isset($_SESSION['registerEtap'])) {
