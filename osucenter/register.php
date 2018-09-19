@@ -22,12 +22,6 @@ include("functions/user_menager.php");
             <div id="buttonDalej">
                 <input type="button" value="<?php echo jsonLocalFileParse('lang_'.jsonLocalFileParse(" general_settings")['lang']['lang'])['ogolne']['Dalej']; ?>" name="dalej">
             </div>
-            <?php
-            if(isset($_REQUEST['dalej'])) {
-                setRegisterEtap();
-            }
-        ?>
-
         </section>
         <section class="register_element">
             <h2>
@@ -53,14 +47,6 @@ include("functions/user_menager.php");
             </h2>
             <input type="button" name="sendInformacje_Yes" value="<?php echo jsonLocalFileParse('lang_'.jsonLocalFileParse("general_settings")['lang']['lang'])['ogolne']['Tak']; ?>">
             <input type="button" name="sendInformacje_No" value="<?php echo jsonLocalFileParse('lang_'.jsonLocalFileParse("general_settings")['lang']['lang'])['ogolne']['Nie']; ?>">
-            <?php 
-        if(isset($_POST['sendInformacje_Yes'])) {
-            $infoStan = ifInformacje($_POST['sendInformacje_Yes']);
-        }
-        else {
-            $infoStan = ifInformacje(false);
-        }
-        ?>
         </section>
         <section class="register_element">
             <h2>
@@ -76,15 +62,15 @@ include("functions/user_menager.php");
         </section>
     </form>
     <?php 
-    if(!empty($nick)&&!empty($password)&&!empty($email)) {
-        if(empty($_POST['potworzPassword'])) {
-            $potworzPassword = null;
+    if(!empty($_POST['password']) && !empty($_POST['potworzPassword'])) {
+        if(checkHaslo($_POST['password'],$_POST['potworzPassword'])) {
+            echo "Hasla zgadzają się";
         }
-        if(empty($_POST['osu_nick'])) {
-            $osu_nick = $_POST['nickname'];
+        else if(!checkHaslo($_POST['password'],$_POST['potworzPassword'])) {
+            echo "Hasła nie pasują do siebie";
         }
-    //registerUser($_POST['nickname'],$_POST['password'],$potworzPassword,$_POST['email'],$infoStan,$_POST['osu_nick']);
     }
+    //registerUser($_POST['nickname'],$_POST['password'],$potworzPassword,$_POST['email'],$infoStan,$_POST['osu_nick']);
     
     ?>
     <script>

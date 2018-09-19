@@ -11,13 +11,13 @@ function checkNazwa($username) {
     }
 }
 function checkHaslo($password,$powtorzPassword) {
-    if(isset($password) && isset($potworzPassword)) {
-        if($password == $powtorzPassword) {
+        $firstPassword = md5($password);
+        $secondPassword = md5($powtorzPassword);
+    
+        if($firstPassword == $secondPassword)) {
             return true;
         }
         return false;
-    }
-    return false;
 }
 function checkEmail($email) {
     
@@ -29,7 +29,6 @@ function registerUser($sprawdzonyName,$sprawdzonyPass,$sprawdzonyInfo,$sprawdzon
             
         }
     }
-}
 function ifInformacje($infoStatus) {
     if($infoStatus) {
         return true;

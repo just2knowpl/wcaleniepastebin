@@ -1,0 +1,6 @@
+{
+    "error_pl": {
+        "1": "Wystąpił problem ze strukturą danych. Wartość wymagana głównego trybu nie została znaleziona. Prosimy o kontakt z administratorem.",
+        "404": "Plik nie został znaleziony"
+    }
+}
