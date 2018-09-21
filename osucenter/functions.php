@@ -84,6 +84,24 @@ function lastDate($date_pass) {
     return $cur_date - $date_pass;
 }
 
-function recent($json_recent) {
-    
-}
+//function recent($json_recent) {
+//    foreach($json_recent as $player_recent) {//($i=0;$i<count($json_recent);$i++) {
+//            $map_id = $player_recent['beatmap_id'];
+//            $player_300 = $player_recent['count300']; 
+//            $player_100 = $player_recent['count100']; 
+//            $player_50 = $player_recent['count50']; 
+//            $player_miss = $player_recent['countmiss']; 
+//        echo "
+//             <div>
+//            <p>beatmap name:</p>
+//            <p>artist:</p>
+//            <p>maxcombo:</p>
+//            <p>300: " . $player_300 . " 100: " . $player_100 . " 50: " . $player_50 . " miss:</p>
+//            <p>rank:</p>
+//            <p>mods:</p>
+//            </div>";
+//            if($player_recent['perfect'] == 1) {
+//                echo "<p>fc</p>";
+//            }
+//        }
+//}

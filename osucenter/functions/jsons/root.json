@@ -1,0 +1,37 @@
+
+{
+    "mods": {
+        "0": "None",
+        "1": "NoFail",
+        "2": "Easy",
+        "4": "TouchDevice",
+        "8": "Hidden",
+        "16": "HardRock",
+        "32": "SuddenDeath",
+        "64": "DoubleTime",
+        "128": "Relax",
+        "256": "HalfTime",
+        "512": "Nightcore",
+        "1024": "Flashlight",
+        "2048": "Autopilot",
+        "4096": "SpunOut",
+        "8192": "Relax2",
+        "16384": "Perfect",
+        "32768": "Key4",
+        "65536": "Key5",
+        "131072": "Key6",
+        "262144": "Key7",
+        "524288": "Key8",
+        "1048576": "FadeIn",
+        "2097152": "Random",
+        "4194304": "Cinema",
+        "8388608": "Target",
+        "16777216": "Key9",
+        "33554432": "KeyCoop",
+        "67108864": "Key1",
+        "134217728": "Key2",
+        "268435456": "Key3",
+        "536870912": "ScoreV2",
+        "1073741824": "LastMod"
+    }
+}

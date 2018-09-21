@@ -1,11 +1,16 @@
-<html>
+<?php
+  // JSON string
+  $someJSON = '[{"name":"Jonathan Suh","gender":"male"},{"name":"William Philbin","gender":"male"},{"name":"Allison McKinnery","gender":"female"}]';
 
-<head>
+  // Convert JSON string to Array
+  $someArray = json_decode($someJSON, true);
+  foreach ($someArray as $key => $value) {
+    echo $value["name"] . ", " . $value["gender"] . "<br>";
+  }
 
-</head>
-
-<body>
-    <h1>Welcome to Osu!Center</h1>
-</body>
-
-</html>
+  // Loop through Object
+  $someObject = ...; // Replace ... with your PHP Object
+  foreach($someObject as $key => $value) {
+    echo $value->name . ", " . $value->gender . "<br>";
+  }
+?>

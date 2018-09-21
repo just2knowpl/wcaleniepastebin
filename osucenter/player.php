@@ -1,5 +1,6 @@
 <?php
 include 'functions.php';
+include 'functions/general_functions.php';
 ?>
     <!DOCTYPE html>
 
@@ -18,35 +19,37 @@ $api_key = "369739eaae04eaafbe89293926f096fbbbd20b5b";
 $user = $_GET['nick'];
 
 $str = file_get_contents('https://osu.ppy.sh/api/get_user?u='.$user.'&k='.$api_key);
-$best_plays = file_get_contents('https://osu.ppy.sh/api/get_user_best?u='.$user.'&k='.$api_key);
+$best_plays = file_get_contents('https://osu.ppy.sh/api/get_user_best?u='.$user.'&limit=10&k='.$api_key);
 $json = json_decode($str, true);
 $json_best_plays = json_decode($best_plays, true);
 $recent = file_get_contents('https://osu.ppy.sh/api/get_user_recent?u='.$user.'&k='.$api_key);
 $json_recent = json_decode($recent, true);
 
     if($json) {
-        $nickname = $json[0]['username'];
-        $playerId = $json[0]['user_id'];
-        $pp = number_format(round($json[0]['pp_raw'],0));
-        $totalPoints = number_format($json[0]['total_score']);
-        $rankedPoints = number_format($json[0]['ranked_score']);
-        $count300 = number_format(300 * $json[0]['count300']);
-        $count100 = number_format(100 * $json[0]['count100']);
-        $count50 = number_format(50 * $json[0]['count50']);
-        $lvl = round($json[0]['level'],2);
+        foreach($json as $playerInfo) {
+        $nickname = $playerInfo['username'];
+        $playerId = $playerInfo['user_id'];
+        $pp = number_format(round($playerInfo['pp_raw'],0));
+        $totalPoints = number_format($playerInfo['total_score']);
+        $rankedPoints = number_format($playerInfo['ranked_score']);
+        $count300 = number_format(300 * $playerInfo['count300']);
+        $count100 = number_format(100 * $playerInfo['count100']);
+        $count50 = number_format(50 * $playerInfo['count50']);
+        $lvl = round($playerInfo['level'],2);
         $lvl_arr = explode('.',$lvl);
-        //$lvl_arr[0];  // Before the Decimal point
+        //$lvl_arr;  // Before the Decimal point
         //$lvl_arr[1];  // After the Decimal point
-        $acc = round($json[0]['accuracy'],2);
-        $ss_rank = number_format($json[0]['count_rank_ss']);
-        $ssh_rank = number_format($json[0]['count_rank_ssh']);
-        $s_rank = number_format($json[0]['count_rank_s']);
-        $sh_rank = number_format($json[0]['count_rank_sh']);
-        $a_rank = number_format($json[0]['count_rank_a']);
-        $country = country($json[0]['country']);
-        $country_rank = number_format($json[0]['pp_country_rank']);
-        $global_rank = number_format($json[0]['pp_rank']);
+        $acc = round($playerInfo['accuracy'],2);
+        $ss_rank = number_format($playerInfo['count_rank_ss']);
+        $ssh_rank = number_format($playerInfo['count_rank_ssh']);
+        $s_rank = number_format($playerInfo['count_rank_s']);
+        $sh_rank = number_format($playerInfo['count_rank_sh']);
+        $a_rank = number_format($playerInfo['count_rank_a']);
+        $country = country($playerInfo['country']);
+        $country_rank = number_format($playerInfo['pp_country_rank']);
+        $global_rank = number_format($playerInfo['pp_rank']);
         $pos = 1; //zmienna pomocnicza;
+        }
         
 
         echo "
@@ -118,8 +121,9 @@ $json_recent = json_decode($recent, true);
         <div class='pls'>
         ";
         //===========best_score=============
-        for($i=0;$i<count($json_best_plays);$i++) {
-            $b_id = $json_best_plays[$i]['beatmap_id'];
+        //for($i=0;$i<count($json_best_plays);$i++) 
+        foreach($json_best_plays as $player_best){
+            $b_id = $player_best['beatmap_id'];
             $song_checker = file_get_contents('https://osu.ppy.sh/api/get_beatmaps?&k='.$api_key.'&b='.$b_id);
             $json_song_checker = json_decode($song_checker, true);
             $bset_id = $json_song_checker[0]['beatmapset_id'];
@@ -135,8 +139,8 @@ $json_recent = json_decode($recent, true);
             echo "</th></tr>";
             echo "</table>";
             echo "<table> <tr>";
-            echo "<th><div class='pp2'>".round($json_best_plays[$i]['pp'],2)."pp</div></th></tr>";
-            echo "<tr><th class='acc2'>".accCalc($json_best_plays[$i]['count300'],$json_best_plays[$i]['count100'],$json_best_plays[$i]['count50'],$json_best_plays[$i]['countmiss'])." acc</th></tr>"; 
+            echo "<th><div class='pp2'>".round($player_best['pp'],2)."pp</div></th></tr>";
+            echo "<tr><th class='acc2'>".accCalc($player_best['count300'],$player_best['count100'],$player_best['count50'],$player_best['countmiss'])." acc</th></tr>"; 
             echo "</table>  </div>";
             echo "<div class='stats'>
             <p class='icon_stats_star'> </p> ".round($json_song_checker[0]['difficultyrating'],1)." 
@@ -150,17 +154,17 @@ $json_recent = json_decode($recent, true);
             <div class='poziom2'>
             ";
             echo "<table class='scoreCount'><tr><td>";
-            if($json_best_plays[$i]['perfect'] == 1) {
+            if($player_best['perfect'] == 1) {
                 echo "<div class='combo'>FULL COMBO</div></td></tr>";
             }
             else {
-                echo "<div class='combo'>".number_format($json_best_plays[$i]['maxcombo'])."/".number_format($json_song_checker[0]['max_combo'])."</div></td></tr>";
+                echo "<div class='combo'>".number_format($player_best['maxcombo'])."/".number_format($json_song_checker[0]['max_combo'])."</div></td></tr>";
             }
-            echo "<tr><td><span class='hit300'>".$json_best_plays[$i]['count300']."</span><span class='separator'>/</span><span class='hit100'>".$json_best_plays[$i]['count100']."</span><span class='separator'>/</span><span class='hit50'>".$json_best_plays[$i]['count50']."</span></td></tr></table>";
+            echo "<tr><td><span class='hit300'>".$player_best['count300']."</span><span class='separator'>/</span><span class='hit100'>".$player_best['count100']."</span><span class='separator'>/</span><span class='hit50'>".$player_best['count50']."</span></td></tr></table>";
             //===========
-            echo "<p style='width: 33%;'><img src='img/".$json_best_plays[$i]['rank']."-rank.png' class='.small-ico'></p>";
+            echo "<p style='width: 33%;'><img src='img/".$player_best['rank']."-rank.png' class='.small-ico'></p>";
             echo "
-            <p class='fullScores'>".number_format($json_best_plays[$i]['score'])." points</p>";
+            <p class='fullScores'>".number_format($player_best['score'])." points</p>";
             
             //TODO: sprawdzanie w bazie danych. Odciążenie requestów. Jeżeli dana beatmapa nie istnieje w bazie, trzeba ją dodać wraz z potrzebnymi informacjami, w przeciwnym wypadku ma pobrać informacje z bazy. 
             echo "</div>";
@@ -179,26 +183,6 @@ $json_recent = json_decode($recent, true);
             
         }
         unset($pos);
-        
-            
-        
-//        echo count ($json_best_plays);
-//        echo "<h2>10 most recent plays over the last 24 hours</h2>";
-//        for($i=0;$i<count($json_recent);$i++) {
-//            $map_id = $json_recent[$i]['beatmap_id'];
-//             echo "
-//            <p>beatmap name:</p>
-//            <p>artist:</p>
-//            <p>maxcombo:</p>
-//            <p>300: 100: 50: miss:</p>
-//            <p>rank:</p>
-//            <p>mods:</p>
-//            ";
-//            if($json_recent[$i]['perfect'] == 1) {
-//                echo "<p>fc</p>";
-//            }
-//        }
-       
     }
 
     else {
@@ -209,7 +193,11 @@ $json_recent = json_decode($recent, true);
 }
 ?>
             <h2>Recent plays</h2>
-
+<?php
+        
+        //echo recent($json_recent);
+        
+        ?>
     </body>
 
     </html>
